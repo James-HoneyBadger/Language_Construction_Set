@@ -14,8 +14,15 @@ A comprehensive system for creating custom programming language variants through
 
 **Try it now**:
 ```bash
-python3 run_teachscript.py teachscript_examples/01_hello_world.teach
-python3 test_teachscript.py  # Run all tests
+# Using installed package
+cd demos/teachscript
+python run_teachscript.py examples/01_hello_world.teach
+
+# Or from project root
+python demos/teachscript/run_teachscript.py demos/teachscript/examples/01_hello_world.teach
+
+# Run test suite
+python -m pytest tests/
 ```
 
 **Read the complete manual**: [TEACHSCRIPT_MANUAL.md](TEACHSCRIPT_MANUAL.md)
@@ -39,8 +46,48 @@ The Language Construction Set allows you to:
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/James-HoneyBadger/Language_Construction_Set.git
+cd Language_Construction_Set
+
+# Install the package
+pip install -e .
+
+# Or install with development tools
+pip install -e .[dev]
+```
+
+### Project Structure
+
+```
+Language_Construction_Set/
+├── src/hb_lcs/          # Core library
+│   ├── language_config.py   # Configuration system
+│   ├── language_runtime.py  # Runtime integration
+│   ├── cli.py              # Command-line tool
+│   ├── ide.py              # Graphical IDE
+│   └── launch_ide.py       # IDE launcher
+├── docs/                # Documentation
+│   ├── guides/          # User guides
+│   ├── reference/       # Technical reference
+│   └── teachscript/     # TeachScript manuals
+├── configs/             # Language configurations
+│   ├── examples/        # Example configs
+│   └── teachscript.*    # TeachScript config
+├── demos/               # Demonstration programs
+│   ├── teachscript/     # TeachScript demos & runner
+│   │   ├── examples/    # 9 .teach programs
+│   │   └── run_teachscript.py
+│   └── demo_*.py        # Other demos
+├── tests/               # Test suite
+└── README.md            # This file
+```
+
+### Legacy Installation (without pip)
+
+```bash
 # Clone or extract this project
-cd HB_LCS
+cd Language_Construction_Set
 
 # Optional: Install YAML support
 pip install pyyaml
@@ -51,7 +98,11 @@ pip install pyyaml
 Launch the graphical IDE:
 
 ```bash
-python3 ide.py
+# If installed with pip
+hblcs-ide
+
+# Or run directly
+python src/hb_lcs/launch_ide.py
 ```
 
 Features:
@@ -66,7 +117,7 @@ See [IDE_README.md](IDE_README.md) for detailed IDE documentation.
 ### Basic Usage (Python API)
 
 ```python
-from language_config import LanguageConfig
+from hb_lcs.language_config import LanguageConfig
 
 # Create a custom configuration
 config = LanguageConfig()
@@ -98,50 +149,53 @@ config.save("my_custom.yaml")
 
 ## CLI Tool
 
-The `langconfig.py` tool provides command-line access to all features:
+The CLI tool provides command-line access to all features:
 
 ### Create Configurations
 
 ```bash
-# Create from preset
-python langconfig.py create --preset python_like --output my_lang.yaml
+# If installed with pip
+hblcs create --preset python_like --output my_lang.yaml
+
+# Or run directly
+python src/hb_lcs/cli.py create --preset python_like --output my_lang.yaml
 
 # Create interactively
-python langconfig.py create --interactive
+hblcs create --interactive
 
 # Create default
-python langconfig.py create --output default.json
+hblcs create --output default.json
 ```
 
 ### Validate and Inspect
 
 ```bash
 # Validate configuration
-python langconfig.py validate my_lang.yaml
+hblcs validate my_lang.yaml
 
 # Show detailed information
-python langconfig.py info my_lang.yaml
+hblcs info my_lang.yaml
 
 # List available presets
-python langconfig.py list-presets
+hblcs list-presets
 ```
 
 ### Modify Configurations
 
 ```bash
 # Update metadata
-python langconfig.py update my_lang.yaml \
+hblcs update my_lang.yaml \
     --set metadata.author "Your Name" \
     --set metadata.version "2.0" \
     --output my_lang_v2.yaml
 
 # Merge configurations
-python langconfig.py update base.yaml \
+hblcs update base.yaml \
     --merge additions.yaml \
     --output merged.yaml
 
 # Delete elements
-python langconfig.py delete my_lang.yaml \
+hblcs delete my_lang.yaml \
     --keyword obsolete_keyword \
     --function deprecated_func \
     --output cleaned.yaml
@@ -151,14 +205,14 @@ python langconfig.py delete my_lang.yaml \
 
 ```bash
 # Compare two configurations
-python langconfig.py diff config1.yaml config2.yaml
+hblcs diff config1.yaml config2.yaml
 
 # Convert between formats
-python langconfig.py convert my_lang.yaml --to json
-python langconfig.py convert my_lang.json --to yaml
+hblcs convert my_lang.yaml --to json
+hblcs convert my_lang.json --to yaml
 
 # Export documentation
-python langconfig.py export my_lang.yaml --format markdown
+hblcs export my_lang.yaml --format markdown
 ```
 
 ## Core Components

@@ -11,8 +11,8 @@ import subprocess
 from pathlib import Path
 
 
-EXAMPLES_DIR = Path(__file__).parent / "teachscript_examples"
-RUNNER = Path(__file__).parent / "run_teachscript.py"
+EXAMPLES_DIR = Path(__file__).parent.parent / "demos" / "teachscript" / "examples"
+RUNNER = Path(__file__).parent.parent / "demos" / "teachscript" / "run_teachscript.py"
 
 # Examples that don't require user input
 NON_INTERACTIVE_EXAMPLES = [

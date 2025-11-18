@@ -4,7 +4,12 @@ Turing-Complete Language Configuration Examples
 Demonstrates six different programming paradigms using LCS
 """
 
-from language_config import LanguageConfig
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from hb_lcs.language_config import LanguageConfig
 
 
 def create_basic_like():

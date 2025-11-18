@@ -14,8 +14,8 @@ import json
 from typing import Optional, cast
 from pathlib import Path
 
-from language_config import LanguageConfig
-from language_runtime import LanguageRuntime, print_language_info
+from hb_lcs.language_config import LanguageConfig
+from hb_lcs.language_runtime import LanguageRuntime, print_language_info
 
 
 class HBLCS_IDE(ttk.Frame):

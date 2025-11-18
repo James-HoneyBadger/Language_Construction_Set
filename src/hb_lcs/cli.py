@@ -21,12 +21,12 @@ import sys
 import argparse
 from pathlib import Path
 
-from language_config import (
+from hb_lcs.language_config import (
     LanguageConfig,
     list_presets,
     create_custom_config_interactive,
 )
-from language_runtime import LanguageRuntime
+from hb_lcs.language_runtime import LanguageRuntime
 
 
 def cmd_create(args):
