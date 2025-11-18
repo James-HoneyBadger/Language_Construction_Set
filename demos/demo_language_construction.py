@@ -9,6 +9,7 @@ to create custom language configurations.
 import sys
 from pathlib import Path
 
+# Add src directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from hb_lcs.language_config import LanguageConfig
@@ -39,7 +40,7 @@ def demo_basic_usage():
     print("\nCreated configuration:")
     print(f"  Name: {config.name}")
     print(f"  Keywords: {len(config.keyword_mappings)}")
-    print(f"  Syntax: array starts at {config.syntax_options.array_start_index}")
+    print(f"  Syntax: array starts at " f"{config.syntax_options.array_start_index}")
 
     # Save
     config.save("demo_basic.json")
@@ -85,13 +86,14 @@ def demo_runtime():
     print("\nKeyword translation:")
     print(f"  'si' translates to: {LanguageRuntime.translate_keyword('si')}")
     print(
-        f"  'mientras' translates to: {LanguageRuntime.translate_keyword('mientras')}"
+        f"  'mientras' translates to: "
+        f"{LanguageRuntime.translate_keyword('mientras')}"
     )
 
     # Check features
     print("\nFeature status:")
     print(f"  Array start index: {LanguageRuntime.get_array_start_index()}")
-    print(f"  Satirical enabled: {LanguageRuntime.is_feature_enabled('satirical')}")
+    print(f"  Satirical enabled: " f"{LanguageRuntime.is_feature_enabled('satirical')}")
 
     # Show runtime info
     print_language_info()
@@ -116,11 +118,11 @@ def demo_crud_operations():
 
     # Update
     config.rename_keyword("test_keyword", "examen")
-    print(f"✓ Updated: test_keyword -> examen")
+    print("✓ Updated: test_keyword -> examen")
 
     # Delete
     config.delete_keyword("test_keyword")
-    print(f"✓ Deleted: test_keyword")
+    print("✓ Deleted: test_keyword")
 
 
 def demo_validation():
